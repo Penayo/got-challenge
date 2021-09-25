@@ -9,9 +9,13 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { Vue } from 'vue-class-component'
+import House from 'src/models/House'
 
-export default defineComponent({
-  name: 'PageIndex'
-})
+export default class PageIndex extends Vue {
+  async mounted () {
+    const houses = await House.limit(20).get()
+    console.log({ houses })
+  }
+}
 </script>
