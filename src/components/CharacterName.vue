@@ -2,7 +2,14 @@
   <span>
     <q-spinner-dots v-if="!character && url.length > 0" />
     <span v-if="!url || url.length === 0">?</span>
-    <q-card class="card-char-name cursor-pointer" flat bordered square v-if="character">
+    <q-card
+      class="card-char-name cursor-pointer"
+      flat
+      bordered
+      square
+      v-if="character"
+      @click="$router.push({ name: 'CharacterDetails', params: { characterId: character.id } })"
+    >
       <q-item>
         <q-item-section avatar>
           <q-avatar>
@@ -52,7 +59,9 @@ export default class CharacterName extends Vue {
   async mounted () {
     // Solo se estira el Character si la url no es nula o vacía
     if (this.url && this.url.length > 0) {
-      this.character = await Character.find(this.getIdFromURL())
+      const id = this.getIdFromURL()
+      this.character = await Character.find(id)
+      this.character.id = id
     }
   }
 }

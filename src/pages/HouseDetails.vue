@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="visible" @hide="onHide" :maximized="$q.platform.is.mobile">
+  <q-dialog v-model="visible" @hide="onHide" :maximized="$q.platform.is.mobile" persistent>
     <q-card class="main-card q-pa-lg">
       <q-card-section class="q-pt-lg q-pl-lg">
         <div class="row">
@@ -29,6 +29,13 @@
         <div class="text-h6">Founded: {{ house.founded }}</div>        
       </q-card-section>
     </q-card>
+
+    <router-view v-slot="{ Component }">
+      <transition>
+        <component :is="Component" />
+      </transition>
+    </router-view>
+
   </q-dialog>
 </template>
 
@@ -40,7 +47,7 @@ import CharacterName from 'src/components/CharacterName'
 @Options({
   components: { CharacterName }
 })
-export default class HouseDetailPage extends Vue {
+export default class HouseDetailsPage extends Vue {
   visible = false
   house = null
 
