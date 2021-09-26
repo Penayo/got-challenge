@@ -14,6 +14,7 @@
         v-for="(house, index) in houseList"
         :key="index"
         :house="house"
+        @click="$router.push({ name: 'HouseDetail', params: { id: getIdFromURL(house.url) } })"
       />
 
       <template v-slot:loading>
@@ -21,7 +22,8 @@
           <q-spinner-dots color="primary" size="40px" />
         </div>
       </template>
-    </q-infinite-scroll>    
+    </q-infinite-scroll>
+    <router-view />
   </q-page>
 </template>
 
@@ -57,6 +59,11 @@ export default class HousesPage extends Vue {
     }
     done()
   }
+
+  getIdFromURL (url) {
+    const urlSplited = url.split('/')
+    return urlSplited[urlSplited.length -1]
+  }  
 }
 </script>
 

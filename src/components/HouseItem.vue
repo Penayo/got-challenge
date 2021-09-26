@@ -1,6 +1,6 @@
 <template>
   <q-card
-    class="house-card q-ma-md bg-secondary text-white cursor-pointer"
+    class="house-card q-ma-md cursor-pointer"
   >
     <q-card-section>
       <div class="text-h6">{{ house.name }}</div>
