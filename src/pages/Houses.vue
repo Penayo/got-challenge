@@ -2,7 +2,7 @@
   <q-page class="q-pa-lg">
     <div class="row q-pa-sm">
       <div class="col-6 q-pt-lg">
-        <div class="text-h3">Casas de Game Of Thrones</div>
+        <div class="text-h4">Game Of Thrones's Houses</div>
         <div class="text-h6">Lista de las casas nobiliarias que aparecen en la saga de libros Canción de hielo y fuego</div>
       </div>
       <div class="col">
@@ -23,7 +23,11 @@
         </div>
       </template>
     </q-infinite-scroll>
-    <router-view />
+
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+
   </q-page>
 </template>
 

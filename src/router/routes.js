@@ -17,7 +17,8 @@ const routes = [
             children: [
               { name: 'CharacterDetails', path: 'character/:characterId', component: () => import('pages/CharacterDetails.vue') }
             ]
-          }
+          },
+          { name: 'HouseCharacterDetails', path: 'character/:characterId', component: () => import('pages/CharacterDetails.vue') }          
         ]
       }
     ]
