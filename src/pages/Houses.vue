@@ -80,8 +80,6 @@ export default class HousesPage extends Vue {
   filterText = ''
   filterTextField = 'name'
 
-  headerClass = 'header-transparent'
-
   @Watch('filterTextField') onFilterTextFieldChange () {
     this.search()
   }
@@ -116,12 +114,6 @@ export default class HousesPage extends Vue {
       this.getHouses(this.pageNumber, () => {})
     }
   }
-
-  // Determina la clase que tendrá el header de la página, basandose 
-  // en la posición del scroll
-  scrollHandler (scroll) {
-    this.headerClass = scroll.position > 40 ? 'header-back shadow-2' : 'header-transparent'
-  }
 }
 </script>
 
@@ -142,13 +134,5 @@ export default class HousesPage extends Vue {
 .back-page
   padding-left: 40px
   padding-right: 40px
-  background-size: 100%
-  background-attachment: fixed
 
-.header-transparent
-  background-color: transparent
-
-.header-back
-  background-color: url(../assets/house-background-3.webp)
-  background-size: 100%
 </style>
