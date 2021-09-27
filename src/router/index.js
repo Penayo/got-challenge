@@ -26,5 +26,16 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE)
   })
 
+  Router.beforeResolve((to, from, next) => {
+    if (to.path === '/') {
+      next({
+        path: '/houses',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  })
+
   return Router
 })

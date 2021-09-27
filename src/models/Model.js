@@ -9,6 +9,14 @@ export default class Model extends BaseModel {
 
   // Implement a default request method
   request(config) {
+
+    // La API recibe los filtros directo en el query,
+    // por eso es necesario cambiar desde "filter" al query
+    // es la manera mas rápida que encontre
+    config.url = config.url.replace('filter[name]', 'name')
+    config.url = config.url.replace('filter[region]', 'region')    
+    config.url = config.url.replace('filter[words]', 'words')
+    
     return this.$http.request(config)
   }
 

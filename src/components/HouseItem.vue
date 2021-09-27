@@ -1,18 +1,25 @@
 <template>
   <q-card
-    class="house-card q-ma-md cursor-pointer"
+    square
+    class="house-card q-ma-lg cursor-pointer text-grey-3"
   >
     <q-card-section>
       <div class="text-h6">{{ house.name }}</div>
-      <div class="text-subtitle2">Región: {{ house.region }}</div>
-      <div class="text-subtitle2">Words: {{ house.words }}</div>      
-      <div class="text-subtitle2">
+    </q-card-section>
+
+    <q-separator class="bg-grey-3" />
+
+    <q-card-section>
+      <div class="text-subtitle2 text-grey-4">Región: {{ house.region }}</div>
+      <div class="text-subtitle2 text-grey-4">Words: {{ house.words }}</div>      
+      <div class="text-subtitle2 text-grey-3">
         Current Lord:
         <character-name
+          class="text-grey-3"
           :url="house.currentLord"
           @name-clicked="(character) => showCharacterDetails(character, `Current Lord of ${house.name}`)"
         />
-      </div>
+      </div>      
     </q-card-section>
   </q-card>
 </template>
@@ -45,4 +52,5 @@ export default class HouseItem extends Vue {
 .house-card
   width: 100%
   max-width: 380px
+  background: rgba(0,0,0, .7)
 </style>

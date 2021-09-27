@@ -8,7 +8,7 @@
 
     <!-- Versión extendida del nombre del character, incluye icóno y cultura -->
     <q-card
-      class="card-char-name cursor-pointer q-pa-none"
+      class="card-char-name cursor-pointer q-pa-none bg-blue-grey-12"
       flat
       square
       v-if="character && type === 'extended' && url.length > 0"
@@ -33,7 +33,7 @@
     <!-- Versión simple del nombre del character, solo incluye nombre -->
     <a
       href="javascript: void(0)"
-      class="text-black"
+      class="text-grey-3"
       style="text-decoration: none"
       no-caps
       flat
@@ -54,13 +54,8 @@ export default class CharacterName extends Vue {
   // type: normal | extended. Solo el nombre[type=normal], icono, nombre y cultura[type=extended]
   @Prop({ type: String, default: 'normal' }) type
 
-  @Prop({ type: String }) rel
-
   //Url de la api del character a mostrar el nombre
   @Prop({ type: String, required: true }) url
-
-  // El nombre de la ruta donde tiene que ir cuando se hace click en nombre del character
-  @Prop({ type: String, default: 'CharacterDetails' }) routeName
 
   // Propiedad para recibir información extra sobre el Character,
   // Esta propiedad se traspasa a la página de detalles del Character para ser mostrada

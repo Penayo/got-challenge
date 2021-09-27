@@ -1,11 +1,11 @@
 <template>
-  <q-dialog v-model="visible" @hide="onHide" :maximized="$q.platform.is.mobile" persistent>
-    <q-card class="main-card q-pa-lg">
+  <q-dialog v-model="visible" @hide="onHide" :maximized="$q.platform.is.mobile" persistent square>
+    <q-card class="main-card q-pa-lg bg-blue-grey-12">
       <q-card-section class="q-pt-lg q-pl-lg">
         <div class="row">
           <div class="col-10">
             <div class="text-h5 q-mt-lg">{{ house.name }}</div>
-            <div class="text-h6 text-grey-7">Words: {{ house.words }}</div>
+            <div class="text-h6 text-grey-9">Words: {{ house.words }}</div>
           </div>
           <div class="col text-right">
             <q-btn class="q-mt-lg" icon="close" flat round @click="visible=false" />
@@ -16,12 +16,12 @@
       <q-card-section class="q-pl-lg">
         <div class="text-subtitle1 q-mt-md text-grey-7">Región</div> 
         <div class="text-h6"> {{ house.region }}</div>
-        <div class="text-subtitle1 q-mt-md text-grey-7">Coat Of Arms</div>        
+        <div class="text-subtitle1 q-mt-md text-grey-9">Coat Of Arms</div>        
         <div class="text-h6">{{ house.coatOfArms }}</div>
       </q-card-section>
 
       <q-card-section class="q-pl-lg">
-        <div class="text-subtitle1 text-grey-7">Current Lord</div>
+        <div class="text-subtitle1 text-grey-9">Current Lord</div>
         <character-name
           class="text-h6"
           :url="house.currentLord"
@@ -29,7 +29,7 @@
           @name-clicked="(character) => showCharacterDetails(`Current Lord of ${ house.name }`, character)"
         />
 
-        <div class="text-subtitle1 q-mt-lg text-grey-7">Heir</div>
+        <div class="text-subtitle1 q-mt-lg text-grey-9">Heir</div>
         <character-name
           class="text-h6"
           :url="house.heir"
@@ -38,7 +38,7 @@
           type="extended"
         />
 
-        <div class="text-subtitle1 q-mt-lg text-grey-7">Over Lord</div>
+        <div class="text-subtitle1 q-mt-lg text-grey-9">Over Lord</div>
         <character-name
           class="text-h6"
           :url="house.overlord"
@@ -48,7 +48,7 @@
       </q-card-section>
 
       <q-card-section class="q-pl-lg">
-        <div class="text-subtitle1 text-grey-7">Founder</div>
+        <div class="text-subtitle1 text-grey-9">Founder</div>
         <character-name
           class="text-h6"
           :url="house.founder"
@@ -56,7 +56,7 @@
           @name-clicked="(character) => showCharacterDetails(`Founder of ${ house.name }`, character)"
         />
 
-        <div class="text-subtitle1 q-mt-lg text-grey-7">Founded</div>
+        <div class="text-subtitle1 q-mt-lg text-grey-9">Founded</div>
         <div class="text-h6">{{ house.founded }}</div>
       </q-card-section>
     </q-card>

@@ -1,6 +1,12 @@
 <template>
-  <q-dialog v-model="visible" @hide="onHide" position="right" :maximized="$q.platform.is.mobile" :seamless="seamless">
-    <q-card class="main-card q-pa-lg">
+  <q-dialog
+    v-model="visible"
+    @hide="onHide"
+    position="right"
+    :maximized="$q.platform.is.mobile"
+    square
+  >
+    <q-card class="main-card q-pa-lg bg-blue-grey-13 text-grey-2" style="">
       <q-card-section class="">
         <div class="row">
           <div class="col-1 text-left q-pt-sm">
@@ -8,7 +14,7 @@
           </div>
           <div class="col-8 q-pl-sm">
             <div class="text-h6">{{ character.name }}</div>
-            <div class="text-subtitle1 text-grey-7">{{ extraInfo }}</div>
+            <div class="text-subtitle1 text-grey-4">{{ extraInfo }}</div>
           </div>
           <div class="col text-right">
             <q-btn class="" icon="close" flat round @click="visible=false" />
@@ -17,39 +23,39 @@
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Culture</div>
+        <div class="text-subtitle1 text-grey-4">Culture</div>
         <div class="text-h6">{{ character.culture }}</div>      
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Gender</div>
+        <div class="text-subtitle1 text-grey-4">Gender</div>
         <div class="text-h6">{{ character.gender }}</div>      
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Born</div>
+        <div class="text-subtitle1 text-grey-4">Born</div>
         <div class="text-h6">{{ character.born }}</div>      
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Died</div>
+        <div class="text-subtitle1 text-grey-4">Died</div>
         <div class="text-h6">{{ character.died }}</div>      
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Titles</div>
+        <div class="text-subtitle1 text-grey-4">Titles</div>
         <div class="text-h6" v-for="title in character.titles" :key="title">
           {{ title }}
         </div>
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Aliasses</div>
+        <div class="text-subtitle1 text-grey-4">Aliasses</div>
         <div class="text-h6">{{ character.aliasses }}</div>      
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Father</div>
+        <div class="text-subtitle1 text-grey-4">Father</div>
         <character-name
           class="text-h6"
           :url="character.father"
@@ -58,7 +64,7 @@
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Mother</div>
+        <div class="text-subtitle1 text-grey-4">Mother</div>
         <character-name
           class="text-h6"
           :url="character.mother"
@@ -67,7 +73,7 @@
       </q-card-section>
 
       <q-card-section class="" v-if="character.spouse">
-        <div class="text-subtitle1 text-grey-7">Spouse</div>
+        <div class="text-subtitle1 text-grey-4">Spouse</div>
         <character-name
           class="text-h6"
           rel="spouse"
@@ -77,7 +83,7 @@
       </q-card-section>
 
       <q-card-section class="">
-        <div class="text-subtitle1 text-grey-7">Allegiances</div>
+        <div class="text-subtitle1 text-grey-4">Allegiances</div>
         <div class="text-h6" v-for="allegiance in character.allegiances" :key="allegiance">
         <character-name
           class="text-h6"
@@ -85,7 +91,7 @@
           @name-clicked="(characterToShow) => showCharacterDetails(`Allegiance of Lord ${ character.name }'`, characterToShow)"
         />
         </div>
-      </q-card-section>              
+      </q-card-section>
     </q-card>
   </q-dialog>
 </template>
@@ -106,10 +112,6 @@ export default class CharacterDetailsPage extends Vue {
   // Variable de tipo Character[src/models/Character] 
   character = null
 
-  // Variable para manejar si el Dialog es modal o no.
-  // Ver [https://quasar.dev/vue-components/dialog#qdialog-api] pestaña 'Content'
-  seamless = true
-
   // Variable para guardar información extra sobre el Character
   // Ejemplo: Lord of House Algood. Dellonne Allyrion's Mother
   extraInfo = ''
@@ -118,11 +120,11 @@ export default class CharacterDetailsPage extends Vue {
     this.$router.go(-1)
   }
 
-  @Watch('$route') onRouteChange () {
+  @Watch('$route') async onRouteChange () {
     console.log('Will load character', this.$route.name)
-    /* if (this.$route.params.characterId) {
-      this.init()
-    } */
+    if (this.$route.params.characterId && this.$route.params.characterId !== this.character.id) {
+      this.character = await Character.find(this.$route.params.characterId)
+    }
   }
 
   // Mostrar los detalles del character.
@@ -134,7 +136,7 @@ export default class CharacterDetailsPage extends Vue {
   // Acciones al montarse la página o al cambiar de character
   async init () {
     this.character = await Character.find(this.$route.params.characterId)
-    this.seamless = this.$route.name === 'CharacterDetails'
+    // this.seamless = this.$route.name === 'CharacterDetails'
     this.extraInfo = this.$route.query.extraInfo || ''
     this.visible = true
   }
@@ -152,4 +154,5 @@ export default class CharacterDetailsPage extends Vue {
 
 .main-card
   height: calc(100vh - 50px)
+  background-color: rgba(0,0,0,.6)
 </style>
